@@ -1,157 +1,253 @@
 <!doctype html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>הראל נדיב — שרת מיינקראפט רשמי | mc.harelnadiv.com</title>
-  <meta name="description" content="האתר הרשמי המהלל את הראל נדיב. הצטרפו לשרת המיינקראפט mc.harelnadiv.com.">
-  <meta property="og:title" content="mc.harelnadiv.com — השרת של הראל נדיב">
-  <meta property="og:description" content="מצטרפים עכשיו ומתחילים לשחק.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="hero.jpg">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stupid Website</title>
   <style>
-    :root{
-      --bg:#0b0c10; --fg:#eaeaea; --muted:#b8c1cc; --brand:#4fd1c5; --accent:#ffd166;
-      --card:#111318; --glass: rgba(0,0,0,.35);
+    :root {
+      --bg1: #ff00ff;
+      --bg2: #00ffff;
+      --bg3: #ffff00;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans Hebrew", "Noto Sans", sans-serif;
-      background:var(--bg); color:var(--fg); line-height:1.6;
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Comic Sans", cursive, system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 20%, var(--bg1), transparent 40%),
+                  radial-gradient(circle at 80% 30%, var(--bg2), transparent 40%),
+                  radial-gradient(circle at 50% 80%, var(--bg3), transparent 40%),
+                  repeating-conic-gradient(from 0deg, #fff 0deg 10deg, #eee 10deg 20deg);
+      cursor: crosshair;
+      overflow-x: hidden;
     }
-    .topbar{
-      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(10px);
-      background:linear-gradient(90deg, rgba(0,0,0,.7), rgba(0,0,0,.4));
-      padding:.6rem 1rem; border-bottom:1px solid rgba(255,255,255,.06);
-      display:flex; gap:.75rem; align-items:center; justify-content:space-between;
+    header {
+      text-align: center;
+      padding: 24px 12px;
     }
-    .ip{
-      font-weight:800; font-size:clamp(1.1rem, 2vw + .2rem, 1.6rem);
-      letter-spacing:.5px; color:var(--accent);
+    .blink {
+      animation: blink 0.7s steps(1) infinite;
     }
-    .copy-btn{
-      border:1px solid rgba(255,255,255,.2); background:transparent; color:var(--fg);
-      padding:.35rem .75rem; border-radius:999px; cursor:pointer; font-weight:700;
+    @keyframes blink { 50% { opacity: 0; } }
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      border-top: 6px dotted #000;
+      border-bottom: 6px dotted #000;
+      background: linear-gradient(90deg, rgba(255,255,255,.7), rgba(255,255,255,.3));
+      font-weight: 900;
+      font-size: 28px;
+      padding: 8px 0;
     }
-    .copy-btn:active{transform:scale(.98)}
-    .hero{
-      min-height:100vh; position:relative; display:grid; place-items:center;
-      isolation:isolate; overflow:hidden;
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 12s linear infinite;
     }
-    .hero img{
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%;
-      filter:brightness(.65) contrast(1.05) saturate(1.1);
-      z-index:-2;
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 16px 48px;
     }
-    .hero::after{
-      content:""; position:absolute; inset:0;
-      background:radial-gradient(40% 60% at 50% 50%, rgba(0,0,0,.0) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.85) 100%);
-      z-index:-1;
+    .card {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 18px rgba(0,0,0,.2);
+      transform: rotate(calc(var(--r) * 1deg)) scale(1);
+      transition: transform .2s ease;
+      background: #fff;
+      border: 6px ridge #000;
     }
-    .hero-content{
-      text-align:center; max-width:1000px; padding:2rem;
+    .card:hover { transform: rotate(calc(var(--r) * 1deg)) scale(1.08); }
+    .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .toolbar {
+      position: sticky;
+      bottom: 0;
+      background: rgba(255,255,255,.8);
+      backdrop-filter: blur(4px);
+      border-top: 6px ridge #000;
+      padding: 12px 16px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      z-index: 10;
     }
-    h1{
-      margin:.2rem 0 1rem; font-size:clamp(2rem, 6vw, 4.2rem); line-height:1.1;
+    button {
+      font-family: inherit;
+      font-size: 16px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 4px outset #000;
+      background: conic-gradient(from 0deg, #ff0, #0ff, #f0f, #ff0);
+      cursor: pointer;
     }
-    .sub{font-size:clamp(1.05rem, 2.2vw, 1.5rem); color:var(--muted); margin-bottom:1.25rem}
-    .cta{
-      display:inline-flex; align-items:center; gap:.75rem; flex-wrap:wrap; justify-content:center;
+    button:active { transform: translateY(2px); border-style: inset; }
+
+    .badge {
+      position: fixed;
+      right: 10px;
+      top: 10px;
+      background: #000;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,.25);
     }
-    .cta .pill{
-      background:linear-gradient(180deg, var(--brand), #37b3a8);
-      color:#081316; font-weight:900; padding:.9rem 1.3rem; border-radius:999px; border:none; cursor:pointer;
-      font-size:clamp(1rem, 2.2vw, 1.25rem);
+
+    .spinny {
+      position: absolute;
+      inset: auto auto -30px -30px;
+      width: 120px;
+      height: 120px;
+      border: 8px dashed #000;
+      border-radius: 50%;
+      animation: spin 3s linear infinite;
+      opacity: .3;
+      pointer-events: none;
     }
-    .reasons{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:1rem; margin:3rem auto; max-width:1100px; padding:0 1rem;
-    }
-    .card{
-      background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1rem 1.1rem;
-      box-shadow:0 10px 25px rgba(0,0,0,.3);
-    }
-    h2{font-size:clamp(1.4rem, 3vw, 2rem); margin:0 0 .75rem}
-    ul{margin:.2rem 0 0; padding-right:1.1rem}
-    li{margin:.35rem 0}
-    .footer{margin:3rem 0 2rem; text-align:center; color:var(--muted); font-size:.95rem}
-    .big-ip{
-      margin-top:1.5rem; font-size:clamp(1.4rem, 4.8vw, 3rem); font-weight:900; color:var(--accent);
-      word-break:break-all;
-    }
-    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background:rgba(255,255,255,.08); padding:.2rem .45rem; border-radius:.4rem; border:1px solid rgba(255,255,255,.15)}
-    a{color:var(--brand); text-decoration:none}
-    a:hover{text-decoration:underline}
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-  <header class="topbar" role="banner">
-    <div class="ip" id="ipTop">mc.harelnadiv.com</div>
-    <div>
-      <button class="copy-btn" onclick="copyIP()">העתק IP</button>
-    </div>
+  <div class="badge">100% Certified Stupid</div>
+  <header>
+    <h1 class="blink">WELCOME TO THE STUPID WEBSITE</h1>
+    <div class="marquee"><span>⚠️ Warning: maximum stupidity detected • Do not operate heavy machinery while viewing • This site contains stupid images • Proceed anyway ➡️➡️➡️➡️➡️</span></div>
   </header>
 
   <main>
-    <section class="hero" aria-label="תמונת הראל נדיב והזמנה לשרת">
-      <img src="hero.jpg" alt="הראל נדיב">
-      <div class="hero-content">
-        <h1>הראל נדיב</h1>
-        <p class="sub">הדמות המרכזית והמעוררת השראה. כאן מהללים את הראל נדיב ומתחברים לשרת הרשמי.</p>
-        <div class="cta">
-          <button class="pill" onclick="copyIP()">לוחצים ומעתיקים את ה־IP</button>
-        </div>
-        <div class="big-ip" aria-live="polite">mc.harelnadiv.com</div>
-      </div>
-    </section>
-
-    <section class="reasons" aria-label="למה להצטרף לשרת">
-      <article class="card">
-        <h2>למה להצטרף?</h2>
-        <ul>
-          <li>קהילה פעילה ומפרגנת סביב הראל נדיב.</li>
-          <li>אירועים ואתגרים תקופתיים בתוך המשחק.</li>
-          <li>שרת יציב ומהיר עם ניהול קפדני.</li>
-          <li>כללים ברורים ומשחק הוגן.</li>
-          <li>תוספות איכותיות וחוויית משחק נקייה.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h2>איך נכנסים?</h2>
-        <ul>
-          <li>פותחים Minecraft Java Edition.</li>
-          <li>מוסיפים שרת חדש תחת <span class="kbd">Multiplayer</span>.</li>
-          <li>מקלידים את ה־IP: <span class="kbd">mc.harelnadiv.com</span> ולוחצים Join.</li>
-          <li>מומלץ לשמור במועדפים להתחברות מהירה.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h2>שבח ל־הראל נדיב</h2>
-        <ul>
-          <li>מנהיגות, יוזמה ודוגמה אישית.</li>
-          <li>מסירות לקהילה ולשחקנים.</li>
-          <li>חזון ברור לחוויית משחק מהנה.</li>
-        </ul>
-      </article>
-    </section>
+    <section class="board" id="board"></section>
   </main>
 
-  <footer class="footer">
-    נוצר לכבוד הראל נדיב. מתחברים עכשיו: <strong>mc.harelnadiv.com</strong>
-  </footer>
+  <div class="toolbar">
+    <button id="more">Add More Stupid</button>
+    <button id="explode">Explode Page</button>
+    <button id="reset">Reset</button>
+  </div>
 
   <script>
-    async function copyIP(){
-      const ip = "mc.harelnadiv.com";
-      try{
-        await navigator.clipboard.writeText(ip);
-        const btns = document.querySelectorAll('.copy-btn, .pill');
-        btns.forEach(b => { b.textContent = "הועתק! " + ip; setTimeout(()=> b.textContent = b.classList.contains('pill') ? "לוחצים ומעתיקים את ה־IP" : "העתק IP", 2500)});
-      }catch(e){
-        alert(ip);
-      }
+    const board = document.getElementById('board');
+    const moreBtn = document.getElementById('more');
+    const explodeBtn = document.getElementById('explode');
+    const resetBtn = document.getElementById('reset');
+
+    const WORDS = [
+      'STUPID', 'DUMB', 'HMM', 'OKAY', 'BEEP', 'BONK', 'BLURP', 'WHOOPS', 'NOPE', 'YEP',
+      'SMH', 'LOL', '???', '!!!', 'MEH', 'EHH', 'BRUH', 'HA', 'WOW', 'EH'
+    ];
+
+    function rand(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+    function pick(arr) { return arr[rand(0, arr.length - 1)]; }
+
+    function randomColor() {
+      const h = rand(0, 359);
+      const s = rand(60, 95);
+      const l = rand(45, 70);
+      return `hsl(${h} ${s}% ${l}%)`;
     }
+
+    function makeSVGDataURI(w = 800, h = 800) {
+      const bg = randomColor();
+      const dot = randomColor();
+      const text = pick(WORDS);
+      const rot = rand(-25, 25);
+      const emoji = ['🧠','🪙','🍌','🌀','🧃','🧱','🐸','🍕','🪩','🧲','🧦','🥴','🪀','🥓','🐍','🫠'];
+      const em = pick(emoji);
+
+      // SVG with tiled dots + big word
+      const svg = `
+      <svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 ${w} ${h}'>
+        <defs>
+          <pattern id='p' width='40' height='40' patternUnits='userSpaceOnUse'>
+            <rect width='40' height='40' fill='${bg}'/>
+            <circle cx='10' cy='10' r='6' fill='${dot}'/>
+            <circle cx='30' cy='30' r='6' fill='${dot}'/>
+          </pattern>
+        </defs>
+        <rect width='100%' height='100%' fill='url(#p)'/>
+        <g transform='translate(${w/2} ${h/2}) rotate(${rot})'>
+          <text x='0' y='0' text-anchor='middle' dominant-baseline='middle'
+                font-family='Impact, sans-serif' font-size='160' fill='black' opacity='0.2'>${text}</text>
+          <text x='0' y='0' text-anchor='middle' dominant-baseline='middle'
+                font-family='Impact, sans-serif' font-size='156' fill='white' stroke='black' stroke-width='6'>${text}</text>
+          <text x='0' y='150' text-anchor='middle' font-size='120'>${em}</text>
+        </g>
+      </svg>`;
+
+      const encoded = encodeURIComponent(svg)
+        .replace(/'/g, '%27')
+        .replace(/\(/g, '%28')
+        .replace(/\)/g, '%29');
+      return `data:image/svg+xml;charset=utf-8,${encoded}`;
+    }
+
+    function makeCard() {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.setProperty('--r', String(rand(-8, 8)));
+      const img = document.createElement('img');
+      img.alt = 'stupid image';
+      img.src = makeSVGDataURI(800, 800);
+      const ring = document.createElement('div');
+      ring.className = 'spinny';
+      card.appendChild(img);
+      card.appendChild(ring);
+      return card;
+    }
+
+    function populate(n = 12) {
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < n; i++) frag.appendChild(makeCard());
+      board.appendChild(frag);
+    }
+
+    function explode() {
+      const items = Array.from(document.querySelectorAll('.card'));
+      items.forEach((el, i) => {
+        const x = rand(-200, 200);
+        const y = rand(-200, 200);
+        const rot = rand(-360, 360);
+        el.style.transition = 'transform .6s cubic-bezier(.2, .7, .2, 1.4)';
+        el.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg) scale(${1 + Math.random() * 0.6})`;
+      });
+      setTimeout(() => items.forEach(el => el.style.transform = ''), 900);
+    }
+
+    moreBtn.addEventListener('click', () => populate(rand(3,7)));
+    explodeBtn.addEventListener('click', explode);
+    resetBtn.addEventListener('click', () => { board.innerHTML = ''; populate(12); });
+
+    // Cursor confetti
+    document.addEventListener('pointermove', (e) => {
+      const d = document.createElement('div');
+      d.textContent = '✨';
+      d.style.position = 'fixed';
+      d.style.left = e.clientX + 'px';
+      d.style.top = e.clientY + 'px';
+      d.style.pointerEvents = 'none';
+      d.style.transform = `translate(-50%, -50%) rotate(${rand(-45,45)}deg)`;
+      d.style.transition = 'all .8s ease-out';
+      document.body.appendChild(d);
+      requestAnimationFrame(() => {
+        d.style.top = (e.clientY - 60) + 'px';
+        d.style.opacity = '0';
+      });
+      setTimeout(() => d.remove(), 900);
+    });
+
+    // Init
+    populate(16);
   </script>
 </body>
 </html>
