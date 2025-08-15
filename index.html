@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>הראל נדיב — שרת מיינקראפט רשמי | mc.harelnadiv.com</title>
+  <meta name="description" content="האתר הרשמי המהלל את הראל נדיב. הצטרפו לשרת המיינקראפט mc.harelnadiv.com.">
+  <meta property="og:title" content="mc.harelnadiv.com — השרת של הראל נדיב">
+  <meta property="og:description" content="מצטרפים עכשיו ומתחילים לשחק.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="hero.jpg">
+  <style>
+    :root{
+      --bg:#0b0c10; --fg:#eaeaea; --muted:#b8c1cc; --brand:#4fd1c5; --accent:#ffd166;
+      --card:#111318; --glass: rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans Hebrew", "Noto Sans", sans-serif;
+      background:var(--bg); color:var(--fg); line-height:1.6;
+    }
+    .topbar{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(10px);
+      background:linear-gradient(90deg, rgba(0,0,0,.7), rgba(0,0,0,.4));
+      padding:.6rem 1rem; border-bottom:1px solid rgba(255,255,255,.06);
+      display:flex; gap:.75rem; align-items:center; justify-content:space-between;
+    }
+    .ip{
+      font-weight:800; font-size:clamp(1.1rem, 2vw + .2rem, 1.6rem);
+      letter-spacing:.5px; color:var(--accent);
+    }
+    .copy-btn{
+      border:1px solid rgba(255,255,255,.2); background:transparent; color:var(--fg);
+      padding:.35rem .75rem; border-radius:999px; cursor:pointer; font-weight:700;
+    }
+    .copy-btn:active{transform:scale(.98)}
+    .hero{
+      min-height:100vh; position:relative; display:grid; place-items:center;
+      isolation:isolate; overflow:hidden;
+    }
+    .hero img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%;
+      filter:brightness(.65) contrast(1.05) saturate(1.1);
+      z-index:-2;
+    }
+    .hero::after{
+      content:""; position:absolute; inset:0;
+      background:radial-gradient(40% 60% at 50% 50%, rgba(0,0,0,.0) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.85) 100%);
+      z-index:-1;
+    }
+    .hero-content{
+      text-align:center; max-width:1000px; padding:2rem;
+    }
+    h1{
+      margin:.2rem 0 1rem; font-size:clamp(2rem, 6vw, 4.2rem); line-height:1.1;
+    }
+    .sub{font-size:clamp(1.05rem, 2.2vw, 1.5rem); color:var(--muted); margin-bottom:1.25rem}
+    .cta{
+      display:inline-flex; align-items:center; gap:.75rem; flex-wrap:wrap; justify-content:center;
+    }
+    .cta .pill{
+      background:linear-gradient(180deg, var(--brand), #37b3a8);
+      color:#081316; font-weight:900; padding:.9rem 1.3rem; border-radius:999px; border:none; cursor:pointer;
+      font-size:clamp(1rem, 2.2vw, 1.25rem);
+    }
+    .reasons{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:1rem; margin:3rem auto; max-width:1100px; padding:0 1rem;
+    }
+    .card{
+      background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1rem 1.1rem;
+      box-shadow:0 10px 25px rgba(0,0,0,.3);
+    }
+    h2{font-size:clamp(1.4rem, 3vw, 2rem); margin:0 0 .75rem}
+    ul{margin:.2rem 0 0; padding-right:1.1rem}
+    li{margin:.35rem 0}
+    .footer{margin:3rem 0 2rem; text-align:center; color:var(--muted); font-size:.95rem}
+    .big-ip{
+      margin-top:1.5rem; font-size:clamp(1.4rem, 4.8vw, 3rem); font-weight:900; color:var(--accent);
+      word-break:break-all;
+    }
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background:rgba(255,255,255,.08); padding:.2rem .45rem; border-radius:.4rem; border:1px solid rgba(255,255,255,.15)}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <div class="ip" id="ipTop">mc.harelnadiv.com</div>
+    <div>
+      <button class="copy-btn" onclick="copyIP()">העתק IP</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="תמונת הראל נדיב והזמנה לשרת">
+      <img src="hero.jpg" alt="הראל נדיב">
+      <div class="hero-content">
+        <h1>הראל נדיב</h1>
+        <p class="sub">הדמות המרכזית והמעוררת השראה. כאן מהללים את הראל נדיב ומתחברים לשרת הרשמי.</p>
+        <div class="cta">
+          <button class="pill" onclick="copyIP()">לוחצים ומעתיקים את ה־IP</button>
+        </div>
+        <div class="big-ip" aria-live="polite">mc.harelnadiv.com</div>
+      </div>
+    </section>
+
+    <section class="reasons" aria-label="למה להצטרף לשרת">
+      <article class="card">
+        <h2>למה להצטרף?</h2>
+        <ul>
+          <li>קהילה פעילה ומפרגנת סביב הראל נדיב.</li>
+          <li>אירועים ואתגרים תקופתיים בתוך המשחק.</li>
+          <li>שרת יציב ומהיר עם ניהול קפדני.</li>
+          <li>כללים ברורים ומשחק הוגן.</li>
+          <li>תוספות איכותיות וחוויית משחק נקייה.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>איך נכנסים?</h2>
+        <ul>
+          <li>פותחים Minecraft Java Edition.</li>
+          <li>מוסיפים שרת חדש תחת <span class="kbd">Multiplayer</span>.</li>
+          <li>מקלידים את ה־IP: <span class="kbd">mc.harelnadiv.com</span> ולוחצים Join.</li>
+          <li>מומלץ לשמור במועדפים להתחברות מהירה.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>שבח ל־הראל נדיב</h2>
+        <ul>
+          <li>מנהיגות, יוזמה ודוגמה אישית.</li>
+          <li>מסירות לקהילה ולשחקנים.</li>
+          <li>חזון ברור לחוויית משחק מהנה.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    נוצר לכבוד הראל נדיב. מתחברים עכשיו: <strong>mc.harelnadiv.com</strong>
+  </footer>
+
+  <script>
+    async function copyIP(){
+      const ip = "mc.harelnadiv.com";
+      try{
+        await navigator.clipboard.writeText(ip);
+        const btns = document.querySelectorAll('.copy-btn, .pill');
+        btns.forEach(b => { b.textContent = "הועתק! " + ip; setTimeout(()=> b.textContent = b.classList.contains('pill') ? "לוחצים ומעתיקים את ה־IP" : "העתק IP", 2500)});
+      }catch(e){
+        alert(ip);
+      }
+    }
+  </script>
+</body>
+</html>
